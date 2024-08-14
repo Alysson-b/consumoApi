@@ -1,13 +1,13 @@
 
 async function fetchDataParallel(){
-    const apiUrl = ('https://jsonplaceholder.typicode.com/posts/1')
+    const apiUrl = ('https://jsonplaceholder.typicode.com/posts')
 
     const resultContainer = document.getElementById('results')
-    const loardingIndicador = document.getElementById('loarding')
+    const loadingIndicador = document.getElementById('loading')
     const fetchButton = document.getElementById('fetchButton')
 
     try{
-        loardingIndicador.style.display = 'block';
+        loadingIndicador.style.display = 'block';
         fetchButton.disabled = true;
 
         resultContainer.innerHTML = "";
@@ -26,13 +26,13 @@ async function fetchDataParallel(){
         card.className = 'card';
         card.innerHTML = `
             <h2>resultado da requisiçao ${index + 1}</h2>
-            <p><stronge>Titulo:</stronge>${data.title}</p>
-            <p><stronge>Corpo:</stronge>${data.body}</p>
+            <p><strong>Titulo:</strong>${data.title}</p>
+            <p><strong>Corpo:</strong>${data.body}</p>
 
         `
         resultContainer.appendChild(card);
 
-        gsap.fromto(card,
+        gsap.fromTo(card,
             {opacity: 0, y:20},
             {opacity: 1, y:0, duration: 0.5, delay: index * 0.2}
         )
@@ -43,7 +43,7 @@ async function fetchDataParallel(){
         resultContainer.innerHTML = `<p>Erro ao buscar dados: ${error.message}</p>`
     }
     finally{
-        loardingIndicador.style.display = 'none'
+        loadingIndicador.style.display = 'none'
         fetchButton.disabled = false
     }
 }
